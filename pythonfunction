@@ -1,0 +1,43 @@
+def get_value(obj, key):
+    key_list = key.split("/")
+    for k in key_list:
+        if k in obj:
+            obj = obj[k]
+        else:
+            return None
+    return obj
+
+use this function by passing in an object and a key in the format "a/b/c" and it will return the value associated with that key like:
+
+
+
+object = {"a":{"b":{"c":"d"}}}
+key = "a/b/c"
+print(get_value(object, key)) # Output: "d"
+
+As per the test case:
+
+
+
+def test_get_value():
+    obj = {"a": {"b": {"c": "d"}}}
+    key = "a/b/c"
+    assert get_value(obj, key) == "d"
+    obj = {"x": {"y": {"z": "a"}}}
+    key = "x/y/z"
+    assert get_value(obj, key) == "a"
+    obj = {"x": {"y": {"z": {"w": "a"}}}}
+    key = "x/y/z/w"
+    assert get_value(obj, key) == "a"
+    obj = {"x": {"y": {"z": {"w": {"u": "a"}}}}}
+    key = "x/y/z/w/u"
+    assert get_value(obj, key) == "a"
+    obj = {"x": {"y": {"z": {"w": {"u": {"v": "a"}}}}}}
+    key = "x/y/z/w/u/v"
+    assert get_value(obj, key) == "a"
+
+test_get_value()
+
+This function will work for any level of nested dictionary, given that the key passed to the function is valid.
+
+
